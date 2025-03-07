@@ -19,7 +19,7 @@ export function usePlayer({videoRef, playerRef, settingsRef, previewRef, tempVid
         volume: 50,
         window: "",
         loading: false,
-        quality: availableQualities[0] || null,
+        quality: 144,
         muted: false,
         previewVisible: false
     })
@@ -249,6 +249,8 @@ export function usePlayer({videoRef, playerRef, settingsRef, previewRef, tempVid
             video.removeEventListener("seeked", handleSeeked);
         };
     }, []);
+
+    useEffect(() => setVideoStates(prev => ({...prev, quality: availableQualities[0]})),[availableQualities])
 
     return {videoStates, togglePause, toggleFullScreen, handleSeek, changeVolume, setWindow, changeSpeed, changeQuality, toggleMute, previewFuncs}
 }
